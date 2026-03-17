@@ -1,0 +1,27 @@
+{
+  "name": "playwright-automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "smoke": "playwright test --grep \"@smoke\"",
+    "regression": "playwright test --grep \"@regression\"",
+    "report": "playwright show-report",
+    "run-all": "playwright test && playwright show-report",
+    "headed": "playwright test --headed",
+    "demo": "playwright test --headed && playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.2.3",
+    "allure-commandline": "^2.38.0",
+    "allure-playwright": "^3.6.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}
