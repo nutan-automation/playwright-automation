@@ -1,51 +1,32 @@
-import { defineConfig } from '@playwright/test';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
 
-  fullyParallel: true,
-  retries: 1,
-  reporter: [
-  ['list'],
-  ['html'],
-  ['allure-playwright']
-],
+  globalSetup: require.resolve('./tests/auth.setup'),
 
-  use: {
-    baseURL: process.env.BASE_URL,
-    storageState: 'auth/user.json',   // 👈 apply session globally
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    launchOptions: {
-      slowMo: 500
-    }
-  },
+  retries: 1, 
 
+ use: {
+  baseURL: process.env.BASE_URL,
+  storageState: 'auth/user.json',
+  headless: true,
+
+  screenshot: 'only-on-failure', // 📸 auto screenshot
+  video: 'retain-on-failure',    // 🎥 optional but powerful
+},
   projects: [
     {
-      name: 'setup',
-      testMatch: 'auth/auth.setup.ts'
+      name: 'Chromium',
+      use: { ...devices['Desktop Chrome'] },
     },
-
     {
-      name: 'chromium',
-      use: { browserName: 'chromium' },
-      dependencies: ['setup']
+      name: 'Firefox',
+      use: { ...devices['Desktop Firefox'] },
     },
-
     {
-      name: 'firefox',
-      use: { browserName: 'firefox' },
-      dependencies: ['setup']
+      name: 'WebKit',
+      use: { ...devices['Desktop Safari'] },
     },
-
-    {
-      name: 'webkit',
-      use: { browserName: 'webkit' },
-      dependencies: ['setup']
-    }
-  ]
+  ],
 });

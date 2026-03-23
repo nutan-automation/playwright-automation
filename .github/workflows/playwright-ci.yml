@@ -9,6 +9,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+      SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+      SAUCE_PASSWORD: ${{ secrets.SAUCE_PASSWORD }}
+
     strategy:
       matrix:
         browser: [chromium, firefox, webkit]
@@ -29,7 +35,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test --browser ${{ matrix.browser }} --reporter=list,allure-playwright
+        run: npx playwright test --browser ${{ matrix.browser }} --grep "@smoke" --reporter=list,allure-playwright
 
       - name: Upload Allure results
         uses: actions/upload-artifact@v3

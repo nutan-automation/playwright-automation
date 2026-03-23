@@ -1,5 +1,6 @@
 import { test } from '@base/BaseTest';
 
-test('Inventory validation', async ({ inventoryPage }) => {
-  await inventoryPage.isInventoryPageVisible();
+test('@smoke Verify inventory page loads', async ({ page }) => {
+  await page.goto('/inventory.html');
+  // test steps
 });

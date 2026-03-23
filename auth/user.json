@@ -1,16 +1,27 @@
 {
-  "cookies": [],
+  "cookies": [
+    {
+      "name": "session-username",
+      "value": "standard_user",
+      "domain": "www.saucedemo.com",
+      "path": "/",
+      "expires": 1774273065,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
   "origins": [
     {
       "origin": "https://www.saucedemo.com",
       "localStorage": [
         {
           "name": "backtrace-guid",
-          "value": "3da90c08-43c5-407b-83c6-53a86ddd2158"
+          "value": "115e4f32-bdd6-49e0-8fdd-4ac9e0f5dbb6"
         },
         {
           "name": "backtrace-last-active",
-          "value": "1773313608063"
+          "value": "1774272464998"
         }
       ]
     }

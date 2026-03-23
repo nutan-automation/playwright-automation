@@ -1,7 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 
 export class LoginPage {
-
   readonly page: Page;
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
@@ -14,13 +13,13 @@ export class LoginPage {
     this.loginButton = page.locator('#login-button');
   }
 
-  async gotoLoginPage() {
-    await this.page.goto('/');
-  }
-
   async login(username: string, password: string) {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
-    await this.loginButton.click();
+
+    await Promise.all([
+      this.page.waitForNavigation(), // waits for page change
+      this.loginButton.click(),      // triggers login
+    ]);
   }
 }
