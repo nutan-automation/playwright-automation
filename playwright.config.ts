@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import { loadEnv } from './config/envLoader';
 
+loadEnv();
 export default defineConfig({
   testDir: './tests',
 
@@ -13,7 +15,7 @@ export default defineConfig({
   headless: true,
 
   screenshot: 'only-on-failure', // 📸 auto screenshot
-  video: 'retain-on-failure',    // 🎥 optional but powerful
+  video: 'retain-on-failure',    
 },
   projects: [
     {
